@@ -62,15 +62,13 @@ class Gameboard {
     if (orientation === 'horizontal') {
       let yCoord = y;
       for (let i = 0; i < size; i += 1) {
-        console.log(x, yCoord);
-        this.#board[x][yCoord] = 'X';
+        this.#board[x][yCoord] = ship;
         yCoord += 1;
       }
     } else {
       let xCoord = x;
       for (let i = 0; i < size; i += 1) {
-        // this.#board[xCoord][y] = ship;
-        this.#board[xCoord][y] = 'X';
+        this.#board[xCoord][y] = ship;
         xCoord += 1;
       }
     }
