@@ -1,5 +1,6 @@
 import Player from './Player';
 import GameBoard from './Gameboard';
+import { renderBoard } from './dom';
 
 function generateShipPlacement(board) {
   const shipSize = [5, 4, 3, 3, 2];
@@ -65,8 +66,10 @@ class GameLoop {
   }
 
   playRound() {
-    printBoard(this.#playerOneBoard);
-    printBoard(this.#playerTwoBoard);
+    // printBoard(this.#playerOneBoard);
+    // printBoard(this.#playerTwoBoard);
+    const playerOneDiv = document.querySelector('.playerOneContainer');
+    renderBoard(playerOneDiv, this.#playerOneBoard);
 
     this.#activePlayer =
       this.#activePlayer.name === this.#playerOne.name
