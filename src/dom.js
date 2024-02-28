@@ -29,6 +29,37 @@ function renderStartScreen() {
   const content = document.createElement('div');
   content.classList.add('.content');
 
+  // add radio input for amount of players
+  const radio = document.createElement('fieldset');
+  const divOne = document.createElement('div');
+  const labelOne = document.createElement('label');
+  labelOne.htmlFor = 'onePlayerRadio';
+  labelOne.textContent = '1 Player';
+  const inputOne = document.createElement('input');
+  inputOne.id = 'onePlayerRadio';
+  inputOne.name = 'players';
+  inputOne.type = 'radio';
+  inputOne.value = 1;
+  inputOne.checked = true;
+  divOne.appendChild(labelOne);
+  divOne.appendChild(inputOne);
+  radio.appendChild(divOne);
+
+  const divTwo = document.createElement('div');
+  const labelTwo = document.createElement('label');
+  labelTwo.htmlFor = 'twoPlayerRadio';
+  labelTwo.textContent = '2 Players';
+  const inputTwo = document.createElement('input');
+  inputTwo.id = 'twoPlayerRadio';
+  inputTwo.name = 'players';
+  inputTwo.type = 'radio';
+  inputTwo.value = 2;
+  divTwo.appendChild(labelTwo);
+  divTwo.appendChild(inputTwo);
+  radio.appendChild(divTwo);
+
+  content.appendChild(radio);
+
   // add input for player names
   const playerOneInputContainer = document.createElement('div');
   const playerOneLabel = document.createElement('label');
