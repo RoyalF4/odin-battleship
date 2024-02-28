@@ -1,6 +1,6 @@
 import Player from './Player';
 import GameBoard from './Gameboard';
-import { renderBoard } from './dom';
+import { renderBoard, domElements } from './dom';
 
 function generateShipPlacement(board) {
   const shipSize = [5, 4, 3, 3, 2];
@@ -33,8 +33,6 @@ function printBoard(board) {
     });
     boardString += '\n';
   });
-
-  console.log(boardString);
 }
 
 class GameLoop {
@@ -68,8 +66,8 @@ class GameLoop {
   playRound() {
     // printBoard(this.#playerOneBoard);
     // printBoard(this.#playerTwoBoard);
-    const playerOneDiv = document.querySelector('.playerOneContainer');
-    renderBoard(playerOneDiv, this.#playerOneBoard);
+    renderBoard(domElements.playerOneDiv, this.#playerOneBoard);
+    renderBoard(domElements.playerTwoDiv, this.#playerTwoBoard);
 
     this.#activePlayer =
       this.#activePlayer.name === this.#playerOne.name
