@@ -1,6 +1,6 @@
 import Player from './Player';
 import GameBoard from './Gameboard';
-import { renderBoard, domElements } from './dom';
+import { renderBoard, domElements, setActivePlayer } from './dom';
 
 function generateShipPlacement(board) {
   const shipSize = [5, 4, 3, 3, 2];
@@ -25,15 +25,15 @@ function generateShipPlacement(board) {
   }
 }
 
-function printBoard(board) {
-  let boardString = '';
-  board.board.forEach((row) => {
-    row.forEach((e) => {
-      boardString += ` ${typeof e === 'object' ? 'X' : e} `;
-    });
-    boardString += '\n';
-  });
-}
+// function printBoard(board) {
+//   let boardString = '';
+//   board.board.forEach((row) => {
+//     row.forEach((e) => {
+//       boardString += ` ${typeof e === 'object' ? 'X' : e} `;
+//     });
+//     boardString += '\n';
+//   });
+// }
 
 class GameLoop {
   #playerOne;
@@ -64,10 +64,9 @@ class GameLoop {
   }
 
   playRound() {
-    // printBoard(this.#playerOneBoard);
-    // printBoard(this.#playerTwoBoard);
     renderBoard(domElements.playerOneDiv, this.#playerOneBoard);
     renderBoard(domElements.playerTwoDiv, this.#playerTwoBoard);
+    setActivePlayer(this.#activePlayer.name);
 
     this.#activePlayer =
       this.#activePlayer.name === this.#playerOne.name

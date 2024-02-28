@@ -1,6 +1,7 @@
 const domElements = {
   playerOneDiv: document.querySelector('.playerOneContainer'),
   playerTwoDiv: document.querySelector('.playerTwoContainer'),
+  activePlayer: document.querySelector('.activePlayer'),
 };
 
 function renderBoard(playerContainer, playerBoard) {
@@ -22,7 +23,11 @@ function renderBoard(playerContainer, playerBoard) {
   playerContainer.appendChild(container);
 }
 
-export { renderBoard, domElements };
+function setActivePlayer(activePlayer) {
+  domElements.activePlayer.textContent = activePlayer;
+}
+
+export { renderBoard, domElements, setActivePlayer };
 
 // function printBoard(board) {
 //     let boardString = '';
