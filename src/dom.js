@@ -2,6 +2,7 @@ const domElements = {
   playerOneDiv: document.querySelector('.playerOneContainer'),
   playerTwoDiv: document.querySelector('.playerTwoContainer'),
   activePlayer: document.querySelector('.activePlayer'),
+  main: document.querySelector('main'),
 };
 
 function renderBoard(playerContainer, playerBoard) {
@@ -23,11 +24,46 @@ function renderBoard(playerContainer, playerBoard) {
   playerContainer.appendChild(container);
 }
 
+function renderStartScreen() {
+  domElements.main.textContent = '';
+  const content = document.createElement('div');
+  content.classList.add('.content');
+
+  // add input for player names
+  const playerOneInputContainer = document.createElement('div');
+  const playerOneLabel = document.createElement('label');
+  playerOneLabel.htmlFor = 'playerOneName';
+  playerOneLabel.textContent = 'Player One:';
+  const playerOneInput = document.createElement('input');
+  playerOneInput.id = 'playerOneName';
+  playerOneInput.type = 'text';
+  playerOneInput.minLength = 3;
+  playerOneInput.required = true;
+  playerOneInputContainer.appendChild(playerOneLabel);
+  playerOneInputContainer.appendChild(playerOneInput);
+  content.appendChild(playerOneInputContainer);
+
+  const playerTwoInputContainer = document.createElement('div');
+  const playerTwoLabel = document.createElement('label');
+  playerTwoLabel.htmlFor = 'playerTwoName';
+  playerTwoLabel.textContent = 'Player Two:';
+  const playerTwoInput = document.createElement('input');
+  playerTwoInput.id = 'playerTwoName';
+  playerTwoInput.type = 'text';
+  playerTwoInput.minLength = 3;
+  playerTwoInput.required = true;
+  playerTwoInputContainer.appendChild(playerTwoLabel);
+  playerTwoInputContainer.appendChild(playerTwoInput);
+  content.appendChild(playerTwoInputContainer);
+
+  domElements.main.appendChild(content);
+}
+
 function setActivePlayer(activePlayer) {
   domElements.activePlayer.textContent = activePlayer;
 }
 
-export { renderBoard, domElements, setActivePlayer };
+export { renderBoard, domElements, setActivePlayer, renderStartScreen };
 
 // function printBoard(board) {
 //     let boardString = '';

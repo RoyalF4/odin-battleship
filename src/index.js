@@ -1,8 +1,7 @@
 import './css/reset.css';
 import './css/style.css';
-import GameLoop from './GameLoop';
+import Game from './Game';
 
-const gameLoop = new GameLoop('PlayerOne', 'PlayerTwo');
+const game = new Game();
 
-gameLoop.insertDummyMoves();
-gameLoop.playRound();
+game.begin();
