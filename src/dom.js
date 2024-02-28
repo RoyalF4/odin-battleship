@@ -5,6 +5,15 @@ const domElements = {
   main: document.querySelector('main'),
 };
 
+// EVENTS
+
+function radioChangeEvent() {
+  console.log('hello');
+  domElements.playerTwoInputContainer.classList.toggle('hidden');
+}
+
+// RENDER CONTENT
+
 function renderBoard(playerContainer, playerBoard) {
   const container = document.createElement('div');
   container.classList.add('gameboard');
@@ -60,6 +69,11 @@ function renderStartScreen() {
 
   content.appendChild(radio);
 
+  const radioInputs = content.querySelectorAll('input[type="radio"]');
+  radioInputs.forEach((radioInput) =>
+    radioInput.addEventListener('change', radioChangeEvent),
+  );
+
   // add input for player names
   const playerOneInputContainer = document.createElement('div');
   const playerOneLabel = document.createElement('label');
@@ -75,6 +89,8 @@ function renderStartScreen() {
   content.appendChild(playerOneInputContainer);
 
   const playerTwoInputContainer = document.createElement('div');
+  playerTwoInputContainer.classList.toggle('hidden');
+  domElements.playerTwoInputContainer = playerTwoInputContainer;
   const playerTwoLabel = document.createElement('label');
   playerTwoLabel.htmlFor = 'playerTwoName';
   playerTwoLabel.textContent = 'Player Two:';
