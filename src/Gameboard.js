@@ -10,7 +10,9 @@ class Gameboard {
   #ships;
 
   constructor() {
-    this.#board = new Array(BOARD_SIZE).fill(new Array(BOARD_SIZE).fill(0));
+    this.#board = Array(BOARD_SIZE)
+      .fill()
+      .map(() => Array(BOARD_SIZE).fill(0));
     this.#missed = [];
     this.#ships = [];
   }
@@ -60,13 +62,15 @@ class Gameboard {
     if (orientation === 'horizontal') {
       let yCoord = y;
       for (let i = 0; i < size; i += 1) {
-        this.#board[x][yCoord] = ship;
+        console.log(x, yCoord);
+        this.#board[x][yCoord] = 'X';
         yCoord += 1;
       }
     } else {
       let xCoord = x;
       for (let i = 0; i < size; i += 1) {
-        this.#board[xCoord][y] = ship;
+        // this.#board[xCoord][y] = ship;
+        this.#board[xCoord][y] = 'X';
         xCoord += 1;
       }
     }

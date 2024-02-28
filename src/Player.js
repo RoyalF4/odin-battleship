@@ -1,5 +1,3 @@
-import GameBoard from './Gameboard';
-
 class Player {
   #name;
 
@@ -7,15 +5,10 @@ class Player {
 
   constructor(name) {
     this.#name = name;
-    this.#board = new GameBoard();
   }
 
   get name() {
     return this.#name;
-  }
-
-  get board() {
-    return this.#board;
   }
 }
 
