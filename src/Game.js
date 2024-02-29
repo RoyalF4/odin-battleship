@@ -1,5 +1,4 @@
 import Player from './Player';
-import GameBoard from './Gameboard';
 import { domElements, renderStartScreen, renderGameScreen } from './dom';
 import { generateShipPlacement } from './util';
 
@@ -19,14 +18,24 @@ class Game {
   constructor() {
     this.#playerOne = new Player('Player 1');
     this.#playerTwo = new Player('Computer');
-    this.#playerOneBoard = new GameBoard();
-    this.#playerTwoBoard = new GameBoard();
     this.#activePlayer = this.#playerOne;
     this.#numberOfPlayers = 0;
   }
 
   get activePlayer() {
-    return this.#activePlayer.name;
+    return this.#activePlayer;
+  }
+
+  set activePlayer(player) {
+    this.#activePlayer = player;
+  }
+
+  get playerOne() {
+    return this.#playerOne;
+  }
+
+  get playerTwo() {
+    return this.#playerTwo;
   }
 
   get playerOneBoard() {
@@ -47,13 +56,13 @@ class Game {
 
   // TEMPORARY GENERATE BOARD DATA
   insertDummyMoves() {
-    generateShipPlacement(this.#playerOneBoard);
-    generateShipPlacement(this.#playerTwoBoard);
+    generateShipPlacement(this.#playerOne);
+    generateShipPlacement(this.#playerTwo);
   }
   //
 
   begin() {
-    // TEMPORARY GENERATE BOARED DATA
+    // TEMPORARY GENERATE BOARD DATA
     this.insertDummyMoves();
     //
 
@@ -65,6 +74,13 @@ class Game {
       domElements.form.reset();
       renderGameScreen(this);
     });
+  }
+
+  swapActivePlayer() {
+    this.#activePlayer =
+      this.#activePlayer.name === this.#playerOne.name
+        ? this.#playerTwo
+        : this.#playerOne;
   }
 }
 

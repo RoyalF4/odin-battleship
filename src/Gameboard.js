@@ -1,24 +1,24 @@
 import Ship from './Ship';
 
-const BOARD_SIZE = 10;
+const ARRAY_SIZE = 10;
 
 class Gameboard {
-  #board;
+  #array;
 
   #missed;
 
   #ships;
 
   constructor() {
-    this.#board = Array(BOARD_SIZE)
+    this.#array = Array(ARRAY_SIZE)
       .fill()
-      .map(() => Array(BOARD_SIZE).fill(0));
+      .map(() => Array(ARRAY_SIZE).fill(0));
     this.#missed = [];
     this.#ships = [];
   }
 
-  get board() {
-    return this.#board;
+  get array() {
+    return this.#array;
   }
 
   get missed() {
@@ -32,10 +32,10 @@ class Gameboard {
   #isOpenPosition(x, y) {
     return (
       x >= 0 &&
-      x < BOARD_SIZE &&
+      x < ARRAY_SIZE &&
       y >= 0 &&
-      y < BOARD_SIZE &&
-      this.board[x][y] === 0
+      y < ARRAY_SIZE &&
+      this.#array[x][y] === 0
     );
   }
 
@@ -62,31 +62,28 @@ class Gameboard {
     if (orientation === 'horizontal') {
       let yCoord = y;
       for (let i = 0; i < size; i += 1) {
-        this.#board[x][yCoord] = ship;
+        this.#array[x][yCoord] = ship;
         yCoord += 1;
       }
     } else {
       let xCoord = x;
       for (let i = 0; i < size; i += 1) {
-        this.#board[xCoord][y] = ship;
+        this.#array[xCoord][y] = ship;
         xCoord += 1;
       }
     }
   }
 
   placeShip(x, y, size, orientation) {
-    if (this.#isValidPlacement(x, y, size, orientation)) {
+    if (this.#isValidPlacement(x, y, size, orientation))
       this.#createShip(x, y, size, orientation);
-    } else {
-      throw new Error('Invalid Move');
-    }
   }
 
   receiveAttack(x, y) {
-    if (typeof this.#board[x][y] !== 'object') {
+    if (typeof this.#array[x][y] !== 'object') {
       this.#missed.push([x, y]);
     } else {
-      const ship = this.#board[x][y];
+      const ship = this.#array[x][y];
       ship.hit();
     }
   }

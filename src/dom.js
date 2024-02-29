@@ -21,19 +21,25 @@ function radioChangeEvent() {
 
 // RENDER CONTENT
 
-function renderBoard(playerContainer, playerBoard) {
+function renderBoard(playerContainer, player, game) {
   const container = document.createElement('div');
   container.classList.add('gameboard');
+  container.dataset.player = player.name;
 
-  playerBoard.board.forEach((row, x) => {
+  const playerBoard = player.board.array;
+
+  playerBoard.forEach((row, x) => {
     row.forEach((cell, y) => {
       const cellButton = document.createElement('button');
       cellButton.classList.add('gridCell');
       if (typeof cell === 'object') cellButton.classList.toggle('ship');
-      cellButton.addEventListener('click', () => {
-        console.log(x, y);
+      cellButton.addEventListener('click', (event) => {
+        const targetPlayer = event.target.parentElement.dataset.player;
+        if (targetPlayer !== game.activePlayer.name) {
+          console.log(x, y);
+          game.swapActivePlayer();
+        }
       });
-      // ellButton.textContent = ` ${typeof cell === 'object' ? 'X' : cell} `;
       container.appendChild(cellButton);
     });
   });
@@ -129,38 +135,25 @@ function renderGameScreen(game) {
   domElements.main.textContent = '';
   const content = document.createElement('div');
 
-  // set activePlayer
-  const activePlayer = document.createElement('div');
-  activePlayer.textContent = game.activePlayer;
-  content.appendChild(activePlayer);
-
   // player 1 board
   const playerOneBoard = document.createElement('div');
   playerOneBoard.classList.add('playerOneContainer', 'board');
+  playerOneBoard.dataset.player = 'playerOne';
   content.appendChild(playerOneBoard);
   // player 2 board
   const playerTwoBoard = document.createElement('div');
   playerTwoBoard.classList.add('playerTwoContainer', 'board');
+  playerTwoBoard.dataset.player = 'playerTwo';
   content.appendChild(playerTwoBoard);
 
   // render player boards
-  renderBoard(playerOneBoard, game.playerOneBoard);
-  renderBoard(playerTwoBoard, game.playerTwoBoard);
+  renderBoard(playerOneBoard, game.playerOne, game);
+  renderBoard(playerTwoBoard, game.playerTwo, game);
 
   domElements.main.appendChild(content);
 }
 
-function setActivePlayer(activePlayer) {
-  domElements.activePlayer.textContent = activePlayer;
-}
-
-export {
-  renderBoard,
-  domElements,
-  setActivePlayer,
-  renderStartScreen,
-  renderGameScreen,
-};
+export { renderBoard, domElements, renderStartScreen, renderGameScreen };
 
 // function printBoard(board) {
 //     let boardString = '';

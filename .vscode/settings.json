@@ -8,5 +8,8 @@
   // Enable per-language
   "[javascript]": {
     "editor.formatOnSave": true
-  } 
+  },
+  "cSpell.words": [
+    "Gameboard"
+  ]
 }
