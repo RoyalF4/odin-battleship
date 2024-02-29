@@ -8,8 +8,15 @@ const domElements = {
 // EVENTS
 
 function radioChangeEvent() {
-  console.log('hello');
-  domElements.playerTwoInputContainer.classList.toggle('hidden');
+  const isHidden =
+    domElements.playerTwoInputContainer.classList.contains('hidden');
+  if (isHidden) {
+    domElements.playerTwoInputContainer.classList.toggle('hidden');
+    domElements.playerTwoInput.setAttribute('required', '');
+  } else {
+    domElements.playerTwoInput.removeAttribute('required');
+    domElements.playerTwoInputContainer.classList.toggle('hidden');
+  }
 }
 
 // RENDER CONTENT
@@ -38,6 +45,10 @@ function renderStartScreen() {
   const content = document.createElement('div');
   content.classList.add('.content');
 
+  // create form
+  const form = document.createElement('form');
+  domElements.form = form;
+
   // add radio input for amount of players
   const radio = document.createElement('fieldset');
   const divOne = document.createElement('div');
@@ -49,7 +60,7 @@ function renderStartScreen() {
   inputOne.name = 'players';
   inputOne.type = 'radio';
   inputOne.value = 1;
-  inputOne.checked = true;
+  inputOne.setAttribute('checked', '');
   divOne.appendChild(labelOne);
   divOne.appendChild(inputOne);
   radio.appendChild(divOne);
@@ -67,9 +78,9 @@ function renderStartScreen() {
   divTwo.appendChild(inputTwo);
   radio.appendChild(divTwo);
 
-  content.appendChild(radio);
+  form.appendChild(radio);
 
-  const radioInputs = content.querySelectorAll('input[type="radio"]');
+  const radioInputs = form.querySelectorAll('input[type="radio"]');
   radioInputs.forEach((radioInput) =>
     radioInput.addEventListener('change', radioChangeEvent),
   );
@@ -81,12 +92,13 @@ function renderStartScreen() {
   playerOneLabel.textContent = 'Player One:';
   const playerOneInput = document.createElement('input');
   playerOneInput.id = 'playerOneName';
+  playerOneInput.name = 'playerOneName';
   playerOneInput.type = 'text';
   playerOneInput.minLength = 3;
   playerOneInput.required = true;
   playerOneInputContainer.appendChild(playerOneLabel);
   playerOneInputContainer.appendChild(playerOneInput);
-  content.appendChild(playerOneInputContainer);
+  form.appendChild(playerOneInputContainer);
 
   const playerTwoInputContainer = document.createElement('div');
   playerTwoInputContainer.classList.toggle('hidden');
@@ -96,13 +108,20 @@ function renderStartScreen() {
   playerTwoLabel.textContent = 'Player Two:';
   const playerTwoInput = document.createElement('input');
   playerTwoInput.id = 'playerTwoName';
+  playerTwoInput.name = 'playerTwoName';
   playerTwoInput.type = 'text';
   playerTwoInput.minLength = 3;
-  playerTwoInput.required = true;
+  domElements.playerTwoInput = playerTwoInput;
   playerTwoInputContainer.appendChild(playerTwoLabel);
   playerTwoInputContainer.appendChild(playerTwoInput);
-  content.appendChild(playerTwoInputContainer);
+  form.appendChild(playerTwoInputContainer);
 
+  // submit button
+  const submitButton = document.createElement('button');
+  submitButton.textContent = 'Start Game!';
+  form.appendChild(submitButton);
+
+  content.appendChild(form);
   domElements.main.appendChild(content);
 }
 
