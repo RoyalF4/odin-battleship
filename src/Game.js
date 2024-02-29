@@ -1,6 +1,7 @@
 import Player from './Player';
 import GameBoard from './Gameboard';
-import { domElements, renderStartScreen } from './dom';
+import { domElements, renderStartScreen, renderGameScreen } from './dom';
+import { generateShipPlacement } from './util';
 
 class Game {
   #playerOne;
@@ -20,12 +21,20 @@ class Game {
     this.#playerTwo = new Player('Computer');
     this.#playerOneBoard = new GameBoard();
     this.#playerTwoBoard = new GameBoard();
-    this.#activePlayer = 'none';
+    this.#activePlayer = this.#playerOne;
     this.#numberOfPlayers = 0;
   }
 
   get activePlayer() {
-    return this.#activePlayer;
+    return this.#activePlayer.name;
+  }
+
+  get playerOneBoard() {
+    return this.#playerOneBoard;
+  }
+
+  get playerTwoBoard() {
+    return this.#playerTwoBoard;
   }
 
   set players(playerData) {
@@ -36,21 +45,27 @@ class Game {
     }
   }
 
+  // TEMPORARY GENERATE BOARD DATA
+  insertDummyMoves() {
+    generateShipPlacement(this.#playerOneBoard);
+    generateShipPlacement(this.#playerTwoBoard);
+  }
+  //
+
   begin() {
+    // TEMPORARY GENERATE BOARED DATA
+    this.insertDummyMoves();
+    //
+
     renderStartScreen();
     domElements.form.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = Object.fromEntries(new FormData(domElements.form));
       this.players = formData;
       domElements.form.reset();
-      console.log(this.#playerOne.name, this.#playerTwo.name);
+      renderGameScreen(this);
     });
   }
-
-  //   insertDummyMoves() {
-  //     generateShipPlacement(this.#playerOneBoard);
-  //     generateShipPlacement(this.#playerTwoBoard);
-  //   }
 }
 
 export default Game;

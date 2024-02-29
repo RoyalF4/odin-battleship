@@ -125,11 +125,42 @@ function renderStartScreen() {
   domElements.main.appendChild(content);
 }
 
+function renderGameScreen(game) {
+  domElements.main.textContent = '';
+  const content = document.createElement('div');
+
+  // set activePlayer
+  const activePlayer = document.createElement('div');
+  activePlayer.textContent = game.activePlayer;
+  content.appendChild(activePlayer);
+
+  // player 1 board
+  const playerOneBoard = document.createElement('div');
+  playerOneBoard.classList.add('playerOneContainer', 'board');
+  content.appendChild(playerOneBoard);
+  // player 2 board
+  const playerTwoBoard = document.createElement('div');
+  playerTwoBoard.classList.add('playerTwoContainer', 'board');
+  content.appendChild(playerTwoBoard);
+
+  // render player boards
+  renderBoard(playerOneBoard, game.playerOneBoard);
+  renderBoard(playerTwoBoard, game.playerTwoBoard);
+
+  domElements.main.appendChild(content);
+}
+
 function setActivePlayer(activePlayer) {
   domElements.activePlayer.textContent = activePlayer;
 }
 
-export { renderBoard, domElements, setActivePlayer, renderStartScreen };
+export {
+  renderBoard,
+  domElements,
+  setActivePlayer,
+  renderStartScreen,
+  renderGameScreen,
+};
 
 // function printBoard(board) {
 //     let boardString = '';
