@@ -22,4 +22,8 @@ function generateShipPlacement(player) {
   }
 }
 
-export { generateShipPlacement };
+function cartesianToIndex(x, y) {
+  return y * 10 + x;
+}
+
+export { generateShipPlacement, cartesianToIndex };

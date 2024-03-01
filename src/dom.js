@@ -31,7 +31,9 @@ function renderBoard(playerContainer, player, game) {
   playerBoard.forEach((row, x) => {
     row.forEach((cell, y) => {
       const cellButton = document.createElement('button');
-      cellButton.classList.add('gridCell');
+      cellButton.classList.add(
+        player.name === 'Computer' ? 'computerCell' : 'gridCell',
+      );
       if (typeof cell === 'object') cellButton.classList.toggle('ship');
       cellButton.addEventListener('click', (event) => {
         const isNewMove =
@@ -136,6 +138,7 @@ function renderStartScreen() {
 }
 
 function renderGameScreen(game) {
+  console.log(game);
   domElements.main.textContent = '';
   const content = document.createElement('div');
 
@@ -163,12 +166,28 @@ function announceWinner(winner) {
   domElements.main.appendChild(div);
 }
 
+function gameOverMenu() {
+  const container = document.createElement('div');
+  const resetButton = document.createElement('button');
+  resetButton.classList.add('reset');
+  resetButton.textContent = 'Reset';
+
+  const newGameButton = document.createElement('button');
+  newGameButton.classList.add('newGame');
+  newGameButton.textContent = 'New Game';
+
+  container.appendChild(resetButton);
+  container.appendChild(newGameButton);
+  domElements.main.appendChild(container);
+}
+
 export {
   renderBoard,
   domElements,
   renderStartScreen,
   renderGameScreen,
   announceWinner,
+  gameOverMenu,
 };
 
 // function printBoard(board) {

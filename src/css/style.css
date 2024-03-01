@@ -24,13 +24,19 @@ main {
 
 }
 
-.gridCell {
+.gridCell,
+.computerCell {
     background: none;
     border: 1px solid black;
 }
 
+
 .ship {
     background: gray;
+}
+
+.computerCell {
+    background: rgb(0, 0, 131);
 }
 
 .hit {
