@@ -163,7 +163,6 @@ class Game {
     this.#playerTwo = new Player('Computer');
     this.#isGameOver = false;
     this.#activePlayer = this.#playerOne;
-    console.log(this);
     this.begin();
   }
 }
