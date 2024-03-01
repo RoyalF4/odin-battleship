@@ -80,12 +80,23 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
+    let isHit = false;
     if (typeof this.#array[x][y] !== 'object') {
       this.#missed.push([x, y]);
     } else {
       const ship = this.#array[x][y];
       ship.hit();
+      isHit = true;
     }
+    return isHit;
+  }
+
+  isGameOver() {
+    let gameOver = true;
+    this.#ships.forEach((ship) => {
+      if (!ship.isSunk()) gameOver = false;
+    });
+    return gameOver;
   }
 }
 

@@ -1,5 +1,10 @@
 import Player from './Player';
-import { domElements, renderStartScreen, renderGameScreen } from './dom';
+import {
+  domElements,
+  renderStartScreen,
+  renderGameScreen,
+  announceWinner,
+} from './dom';
 import { generateShipPlacement } from './util';
 
 class Game {
@@ -15,11 +20,14 @@ class Game {
 
   #numberOfPlayers;
 
+  #isGameOver;
+
   constructor() {
     this.#playerOne = new Player('Player 1');
     this.#playerTwo = new Player('Computer');
     this.#activePlayer = this.#playerOne;
     this.#numberOfPlayers = 0;
+    this.#isGameOver = false;
   }
 
   get activePlayer() {
@@ -44,6 +52,10 @@ class Game {
 
   get playerTwoBoard() {
     return this.#playerTwoBoard;
+  }
+
+  get isGameOver() {
+    return this.#isGameOver;
   }
 
   set players(playerData) {
@@ -76,7 +88,30 @@ class Game {
     });
   }
 
-  swapActivePlayer() {
+  playRound(targetPlayer, targetElement, x, y) {
+    const target =
+      targetPlayer === this.#playerOne.name ? this.#playerOne : this.#playerTwo;
+    const targetBoard = target.board;
+
+    if (!this.#isGameOver) {
+      const isHit = targetBoard.receiveAttack(x, y);
+      if (isHit) {
+        targetElement.classList.add('hit');
+        if (targetBoard.isGameOver()) {
+          this.#isGameOver = true;
+          const winner =
+            target === this.#playerOne ? this.#playerTwo : this.#playerOne;
+          announceWinner(winner);
+        }
+      } else {
+        targetElement.classList.add('miss');
+      }
+
+      this.#swapActivePlayer();
+    }
+  }
+
+  #swapActivePlayer() {
     this.#activePlayer =
       this.#activePlayer.name === this.#playerOne.name
         ? this.#playerTwo

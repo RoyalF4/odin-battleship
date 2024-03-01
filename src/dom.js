@@ -34,10 +34,14 @@ function renderBoard(playerContainer, player, game) {
       cellButton.classList.add('gridCell');
       if (typeof cell === 'object') cellButton.classList.toggle('ship');
       cellButton.addEventListener('click', (event) => {
-        const targetPlayer = event.target.parentElement.dataset.player;
-        if (targetPlayer !== game.activePlayer.name) {
-          console.log(x, y);
-          game.swapActivePlayer();
+        const isNewMove =
+          !event.target.classList.contains('hit') &&
+          !event.target.classList.contains('miss');
+        if (isNewMove) {
+          const targetPlayer = event.target.parentElement.dataset.player;
+          if (targetPlayer !== game.activePlayer.name && !game.isGameOver) {
+            game.playRound(targetPlayer, event.target, x, y);
+          }
         }
       });
       container.appendChild(cellButton);
@@ -153,7 +157,19 @@ function renderGameScreen(game) {
   domElements.main.appendChild(content);
 }
 
-export { renderBoard, domElements, renderStartScreen, renderGameScreen };
+function announceWinner(winner) {
+  const div = document.createElement('div');
+  div.textContent = `${winner.name} Wins!`;
+  domElements.main.appendChild(div);
+}
+
+export {
+  renderBoard,
+  domElements,
+  renderStartScreen,
+  renderGameScreen,
+  announceWinner,
+};
 
 // function printBoard(board) {
 //     let boardString = '';

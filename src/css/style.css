@@ -33,6 +33,14 @@ main {
     background: gray;
 }
 
+.hit {
+    background: red;
+}
+
+.miss {
+    background: white;
+}
+
 .hidden {
     display: none;
 }

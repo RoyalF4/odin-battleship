@@ -3,8 +3,6 @@ class Ship {
 
   #hits;
 
-  #sunk;
-
   constructor(length) {
     this.#length = length;
     this.#hits = 0;
