@@ -56,11 +56,13 @@ class Game {
   }
 
   set players(playerData) {
-    this.#numberOfPlayers = playerData.players;
+    this.#numberOfPlayers = 1;
     this.#playerOne.name = playerData.playerOneName;
     if (playerData.playerTwoName !== '') {
       this.#numberOfPlayers = 2;
       this.#playerTwo.name = playerData.playerTwoName;
+    } else {
+      this.#playerTwo.name = 'Computer';
     }
   }
 
@@ -103,6 +105,10 @@ class Game {
           const reset = document.querySelector('.reset');
           reset.addEventListener('click', () => {
             this.#resetGame();
+          });
+          const newGame = document.querySelector('.newGame');
+          newGame.addEventListener('click', () => {
+            this.#newGame();
           });
         }
       } else {
@@ -150,6 +156,15 @@ class Game {
     this.#activePlayer = this.#playerOne;
     this.insertDummyMoves();
     renderGameScreen(this);
+  }
+
+  #newGame() {
+    this.#playerOne = new Player('Player 1');
+    this.#playerTwo = new Player('Computer');
+    this.#isGameOver = false;
+    this.#activePlayer = this.#playerOne;
+    console.log(this);
+    this.begin();
   }
 }
 

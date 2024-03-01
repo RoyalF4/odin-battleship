@@ -138,7 +138,6 @@ function renderStartScreen() {
 }
 
 function renderGameScreen(game) {
-  console.log(game);
   domElements.main.textContent = '';
   const content = document.createElement('div');
 
