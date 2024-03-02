@@ -84,10 +84,36 @@ input[type=radio] {
     border: 2px solid black;
 }
 
+.playerOneContainer {
+    border-right: 10px solid black;
+}
+
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.gameWindow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legend {
+    display: flex;
+    margin: 10px 0 0 0;
+}
+
+.hitContainer,
+.missContainer {
+    display: flex;
+    padding: 5px;
+}
+
+.hitContainer > div,
+.missContainer > div {
+    margin: 0 5px 0 0;
 }
 
 label {

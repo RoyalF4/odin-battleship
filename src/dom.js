@@ -52,6 +52,42 @@ function renderBoard(playerContainer, player, game) {
   playerContainer.appendChild(container);
 }
 
+function gameLegend() {
+  const legend = document.createElement('div');
+  legend.classList.add('legend');
+
+  const missContainer = document.createElement('div');
+  missContainer.classList.add('missContainer');
+
+  const missLabel = document.createElement('div');
+  missLabel.textContent = 'Miss';
+
+  const missLegend = document.createElement('button');
+  missLegend.classList.add('gridCell');
+  missLegend.classList.add('miss');
+
+  missContainer.appendChild(missLabel);
+  missContainer.appendChild(missLegend);
+
+  const hitContainer = document.createElement('div');
+  hitContainer.classList.add('hitContainer');
+
+  const hitLabel = document.createElement('div');
+  hitLabel.textContent = 'Hit';
+
+  const hitLegend = document.createElement('button');
+  hitLegend.classList.add('gridCell');
+  hitLegend.classList.add('hit');
+
+  hitContainer.appendChild(hitLabel);
+  hitContainer.appendChild(hitLegend);
+
+  legend.appendChild(missContainer);
+  legend.appendChild(hitContainer);
+
+  return legend;
+}
+
 function renderStartScreen() {
   domElements.main.textContent = '';
   const content = document.createElement('div');
@@ -143,6 +179,8 @@ function renderStartScreen() {
 
 function renderGameScreen(game) {
   domElements.main.textContent = '';
+  const gameWindow = document.createElement('div');
+  gameWindow.classList.add('gameWindow');
   const content = document.createElement('div');
   content.classList.add('computerGame');
 
@@ -161,7 +199,9 @@ function renderGameScreen(game) {
   renderBoard(playerOneBoard, game.playerOne, game);
   renderBoard(playerTwoBoard, game.playerTwo, game);
 
-  domElements.main.appendChild(content);
+  gameWindow.appendChild(content);
+  gameWindow.appendChild(gameLegend());
+  domElements.main.appendChild(gameWindow);
 }
 
 function announceWinner(winner) {
