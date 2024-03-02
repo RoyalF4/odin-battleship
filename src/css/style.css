@@ -1,17 +1,135 @@
+@font-face {
+    font-family: 'Anton';
+    src: url(../fonts/Anton-Regular.ttf) format(truetype);
+}
+
+:root {
+    --ocean-blue: #0077be;
+    --gunmetal-gray: #555555;
+    --nautical-white: #ffffff;
+    --crimson-red: #dc143c;
+    --golden-yellow: #ffd700;
+    --steel-gray: #808080;
+}
+
 body {
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
-    width: 100%;
-    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--ocean-blue);
+}
 
+header {
+    height: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.674);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-family: 'Anton';
+    color: var(--crimson-red);
+}
 
+fieldset {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    background: var(--gunmetal-gray);
+    padding: 10px;
+}
+
+fieldset > div {
+    padding: 5px;
+}
+
+input[type=radio] {
+    accent-color: var(--gunmetal-gray);
+}
+
+.containerForInput > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.menuBtn {
+    background: var(--crimson-red);
+    color: white;
+    padding: 5px;
+    border: 1.5px solid var(--gunmetal-gray);
+    width: 100px;
+    height: 30px;
+}
+
+.menuBtn:hover {
+    box-shadow: 0px 2px 2px 2px #dc143c6a;
+}
+
+.menuBtn:active {
+    transform: scale(.9);
+}
+
+.computerGame {
+    display: flex;
+    border: 2px solid black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    color: white;
+}
+
+input {
+    border: 1px solid var(--gunmetal-gray);
+}
+
+footer {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.674);
+    font-family: 'Anton';
+}
+
+div > a:first-child {
+    margin: 0 5px 0 0;
+}
+
+footer > span {
+    margin: 0 15px 0 0;
+}
+
+.footerText {
+    color: var(--crimson-red);
+}
+
+.footerImg {
+    width: 30px;
+}
+
+header,
+footer {
+    background: var(--gunmetal-gray);
 }
 
 .board {
-    background: rgb(54, 141, 255);
+    background: var(--ocean-blue);
     width: 300px;
     height: 300px;
 }
@@ -32,11 +150,11 @@ main {
 
 
 .ship {
-    background: gray;
+    background: var(--gunmetal-gray);
 }
 
 .computerCell {
-    background: rgb(0, 0, 131);
+    background: rgb(53, 53, 53);
 }
 
 .hit {
@@ -48,5 +166,5 @@ main {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }

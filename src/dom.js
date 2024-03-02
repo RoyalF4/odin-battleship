@@ -55,7 +55,7 @@ function renderBoard(playerContainer, player, game) {
 function renderStartScreen() {
   domElements.main.textContent = '';
   const content = document.createElement('div');
-  content.classList.add('.content');
+  content.classList.add('content');
 
   // create form
   const form = document.createElement('form');
@@ -98,6 +98,8 @@ function renderStartScreen() {
   );
 
   // add input for player names
+  const containerForInput = document.createElement('div');
+  containerForInput.classList.add('containerForInput');
   const playerOneInputContainer = document.createElement('div');
   const playerOneLabel = document.createElement('label');
   playerOneLabel.htmlFor = 'playerOneName';
@@ -110,7 +112,7 @@ function renderStartScreen() {
   playerOneInput.required = true;
   playerOneInputContainer.appendChild(playerOneLabel);
   playerOneInputContainer.appendChild(playerOneInput);
-  form.appendChild(playerOneInputContainer);
+  containerForInput.appendChild(playerOneInputContainer);
 
   const playerTwoInputContainer = document.createElement('div');
   playerTwoInputContainer.classList.toggle('hidden');
@@ -126,10 +128,12 @@ function renderStartScreen() {
   domElements.playerTwoInput = playerTwoInput;
   playerTwoInputContainer.appendChild(playerTwoLabel);
   playerTwoInputContainer.appendChild(playerTwoInput);
-  form.appendChild(playerTwoInputContainer);
+  containerForInput.appendChild(playerTwoInputContainer);
+  form.appendChild(containerForInput);
 
   // submit button
   const submitButton = document.createElement('button');
+  submitButton.classList.add('menuBtn');
   submitButton.textContent = 'Start Game!';
   form.appendChild(submitButton);
 
@@ -140,6 +144,7 @@ function renderStartScreen() {
 function renderGameScreen(game) {
   domElements.main.textContent = '';
   const content = document.createElement('div');
+  content.classList.add('computerGame');
 
   // player 1 board
   const playerOneBoard = document.createElement('div');
